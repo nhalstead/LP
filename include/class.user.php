@@ -64,100 +64,91 @@
     }
     
     // -------------------------------- PROFILE INFORMATION ------------------------------ //
-        
-    public function get_profile($uid){
-            $query = "SELECT members.mem_id, users.uid
-            FROM members
-            INNER JOIN users ON members.fk_users_id = users.uid
-            WHERE uid = $uid";
-            
-            $result = $this->db->query($query) or die($this->db->error);        
-            $user_data = $result->fetch_array(MYSQLI_ASSOC);
-        
-    }
+//    
+//    function InsertInDatabase($fname, $lname, $email, $address, $zipcode, $city, $phone){
+//    global $mysqli;
+//    $query = "INSERT INTO `members` (`fname`, `lname`, `email`, `address`, `zipcode`, `city`, `phone`) 
+//              VALUES ('$fname', '$lname', '$email', '$address', '$zipcode', '$city', '$phone')";
+//    $result = mysqli_query($mysqli, $query);
+//    if($result){
+//        header('location:?');
+//        exit();
+//    }
+//}
     
-    function InsertInDatabase($finame, $laname, $email, $address, $zipcode, $city, $phone){
-    global $mysqli;
-    $query = "INSERT INTO `members` (`finame`, `laname`, `email`, `address`, `zipcode`, `city`, `phone`) 
-              VALUES ('$finame', '$laname', '$email', '$address', '$zipcode', '$city', '$phone')";
-    $result = mysqli_query($mysqli, $query);
-    if($result){
-        header('location:?');
-        exit();
-    }
-}
-    
-    public function get_finame($uid){
-        $query = "SELECT finame FROM members WHERE uid = $uid";
-        
-        $result = $this->db->query($query) or die($this->db->error);
-        
-        $user_data = $result->fetch_array(MYSQLI_ASSOC);
-        echo $user_data['finame'];
-        
-    }
-    
-    public function get_laname($uid){
-        $query = "SELECT laname FROM members WHERE uid = $uid";
-        
-        $result = $this->db->query($query) or die($this->db->error);
-        
-        $user_data = $result->fetch_array(MYSQLI_ASSOC);
-        echo $user_data['laname'];
-        
-    }
-    
-    public function get_email($uid){
-        $query = "SELECT email FROM members WHERE uid = $uid";
-        
-        $result = $this->db->query($query) or die($this->db->error);
-        
-        $user_data = $result->fetch_array(MYSQLI_ASSOC);
-        echo $user_data['email'];
-        
-    }
-        
-    public function get_address($uid){
-        $query = "SELECT address FROM members WHERE uid = $uid";
-        
-        $result = $this->db->query($query) or die($this->db->error);
-        
-        $user_data = $result->fetch_array(MYSQLI_ASSOC);
-        echo $user_data['address'];
-        
-    }
-        
-    public function get_zip($uid){
-        $query = "SELECT zip FROM members WHERE uid = $uid";
-        
-        $result = $this->db->query($query) or die($this->db->error);
-        
-        $user_data = $result->fetch_array(MYSQLI_ASSOC);
-        echo $user_data['zip'];
-        
-    }
-        
-    public function get_city($uid){
-        $query = "SELECT city FROM members WHERE uid = $uid";
-        
-        $result = $this->db->query($query) or die($this->db->error);
-        
-        $user_data = $result->fetch_array(MYSQLI_ASSOC);
-        echo $user_data['city'];
-        
-    }
-        
-    public function get_phone($uid){
-        $query = "SELECT phone FROM members WHERE uid = $uid";
-        
-        $result = $this->db->query($query) or die($this->db->error);
-        
-        $user_data = $result->fetch_array(MYSQLI_ASSOC);
-        echo $user_data['phone'];
-        
-    }
+//    public function get_finame($uid){
+//        $query = "SELECT fname FROM members WHERE uid = $uid";
+//        
+//        $result = $this->db->query($query) or die($this->db->error);
+//        
+//        $user_data = $result->fetch_array(MYSQLI_ASSOC);
+//        echo $user_data['fname'];
+//        
+//    }
+//    
+//    public function get_laname($uid){
+//        $query = "SELECT lname FROM members WHERE uid = $uid";
+//        
+//        $result = $this->db->query($query) or die($this->db->error);
+//        
+//        $user_data = $result->fetch_array(MYSQLI_ASSOC);
+//        echo $user_data['lname'];
+//        
+//    }
+//    
+//    public function get_email($uid){
+//        $query = "SELECT email FROM members WHERE uid = $uid";
+//        
+//        $result = $this->db->query($query) or die($this->db->error);
+//        
+//        $user_data = $result->fetch_array(MYSQLI_ASSOC);
+//        echo $user_data['email'];
+//        
+//    }
+//        
+//    public function get_address($uid){
+//        $query = "SELECT address FROM members WHERE uid = $uid";
+//        
+//        $result = $this->db->query($query) or die($this->db->error);
+//        
+//        $user_data = $result->fetch_array(MYSQLI_ASSOC);
+//        echo $user_data['address'];
+//        
+//    }
+//        
+//    public function get_zip($uid){
+//        $query = "SELECT zip FROM members WHERE uid = $uid";
+//        
+//        $result = $this->db->query($query) or die($this->db->error);
+//        
+//        $user_data = $result->fetch_array(MYSQLI_ASSOC);
+//        echo $user_data['zip'];
+//        
+//    }
+//        
+//    public function get_city($uid){
+//        $query = "SELECT city FROM members WHERE uid = $uid";
+//        
+//        $result = $this->db->query($query) or die($this->db->error);
+//        
+//        $user_data = $result->fetch_array(MYSQLI_ASSOC);
+//        echo $user_data['city'];
+//        
+//    }
+//        
+//    public function get_phone($uid){
+//        $query = "SELECT phone FROM members WHERE uid = $uid";
+//        
+//        $result = $this->db->query($query) or die($this->db->error);
+//        
+//        $user_data = $result->fetch_array(MYSQLI_ASSOC);
+//        echo $user_data['phone'];
+//        
+//    }
     
     // -------------------------------------- PROFILE INFORMATION ENDS --------------------------- //
+		
+	// -------------------------------------- USERS INFORMATION STARTS --------------------------- //
     
     public function get_fname($uid){
         $query = "SELECT fname FROM users WHERE uid = $uid";
@@ -210,6 +201,19 @@
         }
         return $role;
     }
+		
+	// -------------------------------------- USERS INFORMATION ENDS --------------------------- //
+	
+	public function get_profile($uid){
+            $query = "SELECT members.mem_id, users.uid
+            FROM members
+            INNER JOIN users ON members.fk_users_id = users.uid
+            WHERE uid = $uid";
+            
+            $result = $this->db->query($query) or die($this->db->error);        
+            $user_data = $result->fetch_array(MYSQLI_ASSOC);
+        
+    }
     
     /*** starting the session ***/
     public function get_session(){
@@ -223,7 +227,7 @@
     
 }
 
-if (isset($_POST['Submit'])) {
+if (isset($_POST['Submit'])) {		
         $fname  = mysqli_real_escape_string($mysqli, $_POST["fname"]);
         $lname  = mysqli_real_escape_string($mysqli, $_POST["lname"]);
         $email   = mysqli_real_escape_string($mysqli, $_POST["email"]);
