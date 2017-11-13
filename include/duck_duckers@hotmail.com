@@ -242,8 +242,8 @@
 //    }
 //    protected function insert($finame, $laname, $email, $address, $zipcode, $city, $phone, $uid)
 //    {
-//        $query  = "INSERT INTO `members` (`finame`, `liname`, `email`, `address`, `zipcode`, `city`, `phone`, `fk_users_id`) 
-//        VALUES ('$finame', '$liname', '$email', '$address', '$zipcode', '$city', '$phone', '$uid')";
+//        $query  = "INSERT INTO `members` (`finame`, `laname`, `email`, `address`, `zipcode`, `city`, `phone`, `fk_users_id`) 
+//        VALUES ('$finame', '$laname', '$email', '$address', '$zipcode', '$city', '$phone', '$uid')";
 //        $result = $this->db->query($query) or die($this->db->error);
 //        return $this->db->insert_id;
 //    }
