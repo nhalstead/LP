@@ -79,7 +79,7 @@
     function InsertInDatabase($finame, $laname, $email, $address, $zipcode, $city, $phone){
     global $mysqli;
     $query = "INSERT INTO `members` (`finame`, `laname`, `email`, `address`, `zipcode`, `city`, `phone`) 
-              VALUES ('$finame', '$liname', '$email', '$address', '$zipcode', '$city', '$phone')";
+              VALUES ('$finame', '$laname', '$email', '$address', '$zipcode', '$city', '$phone')";
     $result = mysqli_query($mysqli, $query);
     if($result){
         header('location:?');
@@ -98,12 +98,12 @@
     }
     
     public function get_laname($uid){
-        $query = "SELECT liname FROM members WHERE uid = $uid";
+        $query = "SELECT laname FROM members WHERE uid = $uid";
         
         $result = $this->db->query($query) or die($this->db->error);
         
         $user_data = $result->fetch_array(MYSQLI_ASSOC);
-        echo $user_data['liname'];
+        echo $user_data['laname'];
         
     }
     
@@ -222,54 +222,54 @@
         }
     
 }
-class Member
-{
-    /** @var mysqli */
-    protected $db;
-    /** @var User */
-    protected $user;
-    public function __construct(mysqli $db, User $user)
-    {
-        $this->db = $db;
-        $this->user = $user;
-    }
-    public function upsert($finame, $laname, $email, $address, $zipcode, $city, $phone, $uid)
-    {
-        $user = $this->user->get_profile($uid);
-        if (empty($user)) {
-            return $this->insert($finame, $laname, $email, $address, $zipcode, $city, $phone, $uid);
-        }
-    }
-    protected function insert($finame, $laname, $email, $address, $zipcode, $city, $phone, $uid)
-    {
-        $query  = "INSERT INTO `members` (`finame`, `liname`, `email`, `address`, `zipcode`, `city`, `phone`, `fk_users_id`) 
-        VALUES ('$finame', '$liname', '$email', '$address', '$zipcode', '$city', '$phone', '$uid')";
-        $result = $this->db->query($query) or die($this->db->error);
-        return $this->db->insert_id;
-    }
-    protected function update($finame, $laname, $email, $address, $zipcode, $city, $phone, $uid)
-    {
-        $query = "UPDATE members AS m
-                  JOIN users AS u
-                       ON u.uid = m.fk_users_id 
-            SET m.finame = '$finame',
-                m.laname = '$laname',
-                m.email  = '$email',
-                m.address = '$address',
-                m.zipcode = '$zipcode',
-                m.city = '$city',
-                m.phone = '$phone'
-           WHERE u.uid = $uid";
-        return $this->db->query($query);
-    }
-}
-$user = new User;
-$member = new Member($mysqli, $user);
-$member->upsert($finame, $laname, $email, $address, $zipcode, $city, $phone);
+//class Member --- this part dont work but it can be usefull i think ------
+//{
+//    /** @var mysqli */
+//    protected $db;
+//    /** @var User */
+//    protected $user;
+//    public function __construct(mysqli $db, User $user)
+//    {
+//        $this->db = $db;
+//        $this->user = $user;
+//    }
+//    public function upsert($finame, $laname, $email, $address, $zipcode, $city, $phone, $uid)
+//    {
+//        $user = $this->user->get_profile($uid);
+//        if (empty($user)) {
+//            return $this->insert($finame, $laname, $email, $address, $zipcode, $city, $phone, $uid);
+//        }
+//    }
+//    protected function insert($finame, $laname, $email, $address, $zipcode, $city, $phone, $uid)
+//    {
+//        $query  = "INSERT INTO `members` (`finame`, `liname`, `email`, `address`, `zipcode`, `city`, `phone`, `fk_users_id`) 
+//        VALUES ('$finame', '$liname', '$email', '$address', '$zipcode', '$city', '$phone', '$uid')";
+//        $result = $this->db->query($query) or die($this->db->error);
+//        return $this->db->insert_id;
+//    }
+//    protected function update($finame, $laname, $email, $address, $zipcode, $city, $phone, $uid)
+//    {
+//        $query = "UPDATE members AS m
+//                  JOIN users AS u
+//                       ON u.uid = m.fk_users_id 
+//            SET m.finame = '$finame',
+//                m.laname = '$laname',
+//                m.email  = '$email',
+//                m.address = '$address',
+//                m.zipcode = '$zipcode',
+//                m.city = '$city',
+//                m.phone = '$phone'
+//           WHERE u.uid = $uid";
+//        return $this->db->query($query);
+//    }
+//}
+//$user = new User;
+//$member = new Member($mysqli, $user);
+//$member->upsert($finame, $laname, $email, $address, $zipcode, $city, $phone);
 
     if (isset($_POST['Submit'])) {
     $finame  = mysqli_real_escape_string($mysqli, $_POST["finame"]);
-    $laname  = mysqli_real_escape_string($mysqli, $_POST["liname"]);
+    $laname  = mysqli_real_escape_string($mysqli, $_POST["laname"]);
     $email   = mysqli_real_escape_string($mysqli, $_POST["email"]);
     $address = mysqli_real_escape_string($mysqli, $_POST["address"]);
     $zipcode = mysqli_real_escape_string($mysqli, $_POST["zipcode"]);
