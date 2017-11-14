@@ -1,5 +1,5 @@
 <?php 
-include_once '../include/class.user.php';
+require_once('../include/class.user.php');
 $user = new User();
 // Checking for user logged in or not
     /*if (!$user->get_session())
@@ -7,28 +7,24 @@ $user = new User();
        header("location:index.php");
     }*/
 if (isset($_POST['submit'])){
-        //extract($_POST);
-
-         $fname = strip_tags(filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING));
-         $lname = strip_tags(filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_STRING));
-         $uname = strip_tags(filter_input(INPUT_POST, 'uname', FILTER_SANITIZE_STRING));
-         $uemail = strip_tags(filter_input(INPUT_POST, 'uemail', FILTER_SANITIZE_EMAIL));
-         $upass = strip_tags(filter_input(INPUT_POST, 'upass', FILTER_SANITIZE_STRING));
-
-
-        $register = $user->reg_user($fname, $lname, $uname, $uemail, $upass);
-        if ($register) {
-            // Registration Success
-            echo "<div class='textcenter'>Registration successful <a href='../login/login.php'>Click here</a> to login</div>";
-        } else {
-            // Registration Failed
-            echo "<div class='textcenter'>Registration failed. Email or Username already exits please try again.</div>";
-        }
-    }
+	$fname = strip_tags(filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING));
+	$lname = strip_tags(filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_STRING));
+	$uname = strip_tags(filter_input(INPUT_POST, 'uname', FILTER_SANITIZE_STRING));
+	$uemail = strip_tags(filter_input(INPUT_POST, 'uemail', FILTER_SANITIZE_EMAIL));
+	$upass = strip_tags(filter_input(INPUT_POST, 'upass', FILTER_SANITIZE_STRING));
+	$register = $user->reg_user($fname, $lname, $uname, $uemail, $upass);
+	
+	if ($register) {
+		// Registration Success
+		echo "<div class='textcenter'>Registration successful <a href='../login/login.php'>Click here</a> to login</div>";
+	} else {
+		// Registration Failed
+		echo "<div class='textcenter'>Registration failed. Email or Username already exits please try again.</div>";
+	}
+}
 ?>
-  <!DOCTYPE html>
-  <html lang="en">
-
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Register</title>
@@ -90,20 +86,19 @@ if (isset($_POST['submit'])){
       function submitreg() {
         var form = document.reg;
         if (form.name.value == "") {
-          alert("Enter name.");
-          return false;
+			alert("Enter name.");
+			return false;
         } else if (form.uname.value == "") {
-          alert("Enter username.");
-          return false;
+			alert("Enter username.");
+			return false;
         } else if (form.upass.value == "") {
-          alert("Enter password.");
-          return false;
+			alert("Enter password.");
+			return false;
         } else if (form.uemail.value == "") {
-          alert("Enter email.");
-          return false;
+			alert("Enter email.");
+			return false;
         }
       }
     </script>
   </body>
-
-  </html>
+</html>

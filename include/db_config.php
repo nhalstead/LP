@@ -5,7 +5,7 @@ ini_set('display_startup_errors', TRUE);
 
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'usbw');
 define('DB_DATABASE', 'login_profile');
 
 define('PROJECT_NAME', 'Film Databasen');
@@ -16,7 +16,6 @@ class DB_con {
 	public $connection;
 	function __construct(){
 		$this->connection = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD,DB_DATABASE);
-		
 		if ($this->connection->connect_error) die('Database error -> ' . $this->connection->connect_error);		
 	}
 	
@@ -25,7 +24,7 @@ class DB_con {
 	}
 }
 
-$mysqli = new mysqli('localhost', 'root', '', 'paradise');
+$mysqli = new mysqli('localhost', 'root', DB_PASSWORD, 'login_profile');
 
 if ($mysqli->connect_errno) {
     echo "Error: " . $mysqli->connect_error . "\n";

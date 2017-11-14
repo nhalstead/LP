@@ -1,15 +1,15 @@
 <?php 
 session_start();
-    include_once '../include/class.user.php';
-    $user = new User();
-    $uid = $_SESSION['uid'];
-    if (!$user->get_session()){
-       header("location:login.php");
-    }
-    if (isset($_GET['q'])){
-        $user->user_logout();
-        header("location:login.php");
-    }
+	require_once('../include/class.user.php');
+	$user = new User();
+	$uid = $_SESSION['uid'];
+	if (!$user->get_session()){
+	   header("Location: ../login/login.php");
+	}
+	if (isset($_GET['q'])){
+		$user->user_logout();
+		header("Location: ../login/login.php");
+	}
 ?>
 <head>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha256-3dkvEK0WLHRJ7/Csr0BZjAWxERc5WH7bdeUya2aXxdU= sha512-+L4yy6FRcDGbXJ9mPG8MT/3UCDzwR9gPeyFNMCtInsol++5m3bk2bXWKdZjvybmohrAsn3Ua5x8gfLnbE1YkOg==" crossorigin="anonymous">

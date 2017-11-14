@@ -1,17 +1,18 @@
 <?php 
 session_start();
-include_once '../include/class.user.php';
+require_once('../include/class.user.php');
 $user = new User();
-
 $uid = $_SESSION['uid'];
 
 if (!$user->get_session()){
-    header("location:../login/login.php");
+    header("location: ../login/login.php");
+	exit(); #Dont Leak any Data Pass this Point.
 }
 
 if (isset($_GET['q'])){
     $user->user_logout();
-    header("location:../login/login.php");
+    header("location: ../login/login.php");
+	exit(); #Dont Leak any Data Pass this Point.
 }
 ?>
 
@@ -23,32 +24,45 @@ if (isset($_GET['q'])){
 <div id="header">
   <a href="adminPage.php?q=logout">LOGOUT</a>
 </div>
-  <br>Hello welcome <h3><?php $user->get_fname($uid); ?></h3> so good to see you<br>
-  <br>Status:<h3><?= $user->get_status($uid);?></h3> <!-- same as echo --><br>   
+  <br>Hello Welcome <h3><?php echo $user->get_fname($uid); ?></h3> so good to see you<br>
+  <br>Status:<h3><?php echo $user->get_status($uid); ?></h3> <!-- same as echo --><br>   
         <!--  Your Permissions:  -->
-        <?php //	$user->get_cname($uid);?>    
+        <?php //$user->get_cname($uid); ?>    
     <img src="add picture here" alt="ProfilePicture"/><br>
-  <br>Full name:<?php $user->get_fname($uid);?>
-  <br>Last name:<?php $user->get_lname($uid);?>
-  <br>Email:<?php $user->get_uemail($uid);?>
+  <br>Full name:<?php echo $user->get_fname($uid);?>
+  <br>Last name:<?php echo $user->get_lname($uid);?>
+  <br>Email:<?php echo $user->get_uemail($uid);?>
 </center>
 <?php
 
 $role = $user->fetch_role($uid);
 
-if($role == 'guest')
-{
-echo "guest content";
-}
-elseif($role == 'member')
-{
-echo "member content";
-}
-elseif($role == 'moderator')
-{
-echo "moderator content";}
-elseif($role == 'admin')
-{
-echo "admin content";
+switch(strtoupper($role)){
+	case "GUEST": 
+		echo "Welcome Guest!";
+	break;
+	
+	case "MEMBER":
+		echo "Hello Memeber!";
+	break;
+	
+	case "MODERATOR":
+		echo "Hello Mod!";
+	break;
+	
+	case "ADMIN":
+		echo "Hello Admin!";
+	break;
+	
+	case "":
+		http_response_code(500);
+		echo "Please contact support, You Account has on perms.";
+		exit();
+	break;
+	default:
+		http_response_code(500);
+		echo "Programming Error! User has no case!";
+		exit();
+	break;
 }
 ?>

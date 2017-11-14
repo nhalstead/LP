@@ -1,29 +1,29 @@
 <?php 
 session_start();
-include_once '../include/class.user.php';
+require_once('../include/class.user.php');
 $user = new User();
 
+function i(&$i) { if(isset($i, $n = "Data") && $i !== "") { return $i } else { die("Missing ".$n."!"); } }
+
 if (isset($_POST['submit'])) { 
-		extract($_POST);   
-	    $login = $user->check_login($emailusername, $password);
-	    if ($login) {
-            $role_id = $user->get_status($_SESSION['uid']);
+		$P = $_POST;		
+	    $login = $user->check_login( i($P['emailusername']), i($P['password']) );
+	    if($login == true) {
+            $role_id = strtoupper($user->get_status($_SESSION['uid']));
             //echo $role_id;
 			if($role_id == 'admin'){
-				header("location:../admin/adminPage.php");
+				header("Location: ../admin/adminPage.php");
 			} else {
-                header("location: home.php");
+                header("Location: home.php");
             }
-	        
 	    } else {
 	        // Login Failed
 	        echo 'Wrong username or password';
 	    }
 	}	
 ?>
-  <!DOCTYPE html>
-  <html lang="en">
-
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>OOP Login Module</title>
@@ -71,17 +71,16 @@ if (isset($_POST['submit'])) {
       </form>
     </div>
     <script>
-      function submitlogin() {
-        var form = document.login;
-        if (form.emailusername.value == "") {
-          alert("Enter email or username.");
-          return false;
-        } else if (form.password.value == "") {
-          alert("Enter password.");
-          return false;
-        }
-      }
+		function submitlogin() {
+			var form = document.login;
+				if (form.emailusername.value == "") {
+				  alert("Enter email or username.");
+				  return false;
+				} else if (form.password.value == "") {
+				  alert("Enter password.");
+				  return false;
+				}
+		}
     </script>
-
-
   </body>
+</html>

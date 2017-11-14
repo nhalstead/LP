@@ -1,35 +1,36 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
+-- version 4.0.4.2
+-- http://www.phpmyadmin.net
 --
--- Vært: 127.0.0.1
--- Genereringstid: 10. 11 2017 kl. 13:16:12
--- Serverversion: 10.1.22-MariaDB
--- PHP-version: 7.1.4
+-- Host: localhost
+-- Generation Time: Nov 14, 2017 at 12:53 AM
+-- Server version: 5.6.13
+-- PHP Version: 5.4.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `login_profile`
 --
+CREATE DATABASE IF NOT EXISTS `login_profile` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `login_profile`;
 
 -- --------------------------------------------------------
 
 --
--- Struktur-dump for tabellen `members`
+-- Table structure for table `members`
 --
 
-CREATE TABLE `members` (
-  `mem_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `members`;
+CREATE TABLE IF NOT EXISTS `members` (
+  `mem_id` int(11) NOT NULL AUTO_INCREMENT,
   `finame` varchar(100) NOT NULL,
   `laname` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -37,23 +38,26 @@ CREATE TABLE `members` (
   `zipcode` int(4) NOT NULL,
   `city` varchar(100) NOT NULL,
   `phone` int(8) NOT NULL,
-  `fk_users_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `fk_users_id` int(11) NOT NULL,
+  PRIMARY KEY (`mem_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Struktur-dump for tabellen `permissions`
+-- Table structure for table `permissions`
 --
 
-CREATE TABLE `permissions` (
-  `permissions_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `permissions`;
+CREATE TABLE IF NOT EXISTS `permissions` (
+  `permissions_id` int(11) NOT NULL AUTO_INCREMENT,
   `permissions_name` varchar(50) NOT NULL,
-  `permissions_cname` varchar(50) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `permissions_cname` varchar(50) NOT NULL,
+  PRIMARY KEY (`permissions_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 
 --
--- Data dump for tabellen `permissions`
+-- Dumping data for table `permissions`
 --
 
 INSERT INTO `permissions` (`permissions_id`, `permissions_name`, `permissions_cname`) VALUES
@@ -85,37 +89,40 @@ INSERT INTO `permissions` (`permissions_id`, `permissions_name`, `permissions_cn
 -- --------------------------------------------------------
 
 --
--- Struktur-dump for tabellen `roles`
+-- Table structure for table `roles`
 --
 
-CREATE TABLE `roles` (
-  `role_id` int(11) NOT NULL,
-  `role_name` varchar(50) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE IF NOT EXISTS `roles` (
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- Data dump for tabellen `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`role_id`, `role_name`) VALUES
-(1, 'admin'),
-(2, 'moderator'),
-(3, 'member'),
-(4, 'guest');
+(1, 'ADMIN'),
+(2, 'MODERATOR'),
+(3, 'MEMBER'),
+(4, 'GUEST');
 
 -- --------------------------------------------------------
 
 --
--- Struktur-dump for tabellen `roles_and_permissions`
+-- Table structure for table `roles_and_permissions`
 --
 
-CREATE TABLE `roles_and_permissions` (
+DROP TABLE IF EXISTS `roles_and_permissions`;
+CREATE TABLE IF NOT EXISTS `roles_and_permissions` (
   `fk_role_id` int(11) NOT NULL,
   `fk_permissions_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Data dump for tabellen `roles_and_permissions`
+-- Dumping data for table `roles_and_permissions`
 --
 
 INSERT INTO `roles_and_permissions` (`fk_role_id`, `fk_permissions_id`) VALUES
@@ -168,21 +175,23 @@ INSERT INTO `roles_and_permissions` (`fk_role_id`, `fk_permissions_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur-dump for tabellen `users`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `uid` int(11) NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
   `fname` varchar(100) DEFAULT NULL,
   `lname` varchar(60) NOT NULL,
   `uname` varchar(30) DEFAULT NULL,
   `uemail` varchar(70) DEFAULT NULL,
   `upass` varchar(50) DEFAULT NULL,
-  `fk_role_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `fk_role_id` int(11) NOT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
--- Data dump for tabellen `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`uid`, `fname`, `lname`, `uname`, `uemail`, `upass`, `fk_role_id`) VALUES
@@ -191,59 +200,6 @@ INSERT INTO `users` (`uid`, `fname`, `lname`, `uname`, `uemail`, `upass`, `fk_ro
 (29, 'spar', 'spar', 'spar', 'spar@live.dk', 'ba260bc2193bda2fecbe96327ef581b3', 1),
 (30, 'batman', 'batman', 'batman', 'Batman@live.dk', '81dc9bdb52d04dc20036dbd8313ed055', 0),
 (31, 'test', 'test', 'test', 'test@live.dk', '81dc9bdb52d04dc20036dbd8313ed055', 3);
-
---
--- Begrænsninger for dumpede tabeller
---
-
---
--- Indeks for tabel `members`
---
-ALTER TABLE `members`
-  ADD PRIMARY KEY (`mem_id`);
-
---
--- Indeks for tabel `permissions`
---
-ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`permissions_id`);
-
---
--- Indeks for tabel `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`role_id`);
-
---
--- Indeks for tabel `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`uid`);
-
---
--- Brug ikke AUTO_INCREMENT for slettede tabeller
---
-
---
--- Tilføj AUTO_INCREMENT i tabel `members`
---
-ALTER TABLE `members`
-  MODIFY `mem_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- Tilføj AUTO_INCREMENT i tabel `permissions`
---
-ALTER TABLE `permissions`
-  MODIFY `permissions_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
---
--- Tilføj AUTO_INCREMENT i tabel `roles`
---
-ALTER TABLE `roles`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- Tilføj AUTO_INCREMENT i tabel `users`
---
-ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
