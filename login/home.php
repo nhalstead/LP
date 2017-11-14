@@ -35,7 +35,7 @@ session_start();
 		<center>
 			<h1>
 			<br>
-			<br>Status: <? echo $user->get_status($uid); ?> <!-- same as echo -->
+			<br>Status: <?php echo $user->get_status($uid); ?> <!-- same as echo -->
 			<br>Hello <?php echo $user->get_fname($uid); ?></h1>
 			<a href="../profiles/profiles.php">Edit Profile</a>
 		</center>

@@ -61,7 +61,7 @@ class User {
 			if ($user_data) {
 				$role = $user_data['role_name'];
 			} else {
-				$role = 'unknow';
+				$role = 'UKNOWN';
 			}
 			return $role;
 	}
