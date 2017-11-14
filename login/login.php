@@ -3,7 +3,7 @@ session_start();
 require_once('../include/class.user.php');
 $user = new User();
 
-function i(&$i) { if(isset($i, $n = "Data") && $i !== "") { return $i } else { die("Missing ".$n."!"); } }
+function i(&$i, $n = "Data") { if(isset($i) && $i !== "") { return $i; } else { die("Missing ".$n."!"); } }
 
 if (isset($_POST['submit'])) { 
 		$P = $_POST;		
