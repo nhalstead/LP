@@ -43,7 +43,7 @@ session_start();
         <i class="fa fa-user">
         </i>
        </div>
-       <input id="Name finame" name="Name finame" type="text" placeholder="" class="form-control input-md">
+       <input id="fname" name="fname" type="text" placeholder="" class="form-control input-md">
       </div>
   </div>
 </div>
@@ -55,7 +55,7 @@ session_start();
        <div class="input-group-addon">
         <i class="fa fa-user"></i>
        </div>
-       <input id="Name liname" name="Name liname" type="text" placeholder="" class="form-control input-md">
+       <input id="lname" name="lname" type="text" placeholder="" class="form-control input-md">
       </div>
   </div>
 </div>
